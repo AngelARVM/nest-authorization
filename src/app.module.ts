@@ -1,12 +1,16 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { APP_GUARD } from '@nestjs/core';
+import { GraphQLModule } from '@nestjs/graphql';
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { MongooseModule, MongooseModuleOptions } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import configuration from './config/configuration';
-import { RolesGuard } from './users/roles.guard';
-import { UsersModule } from './users/users.module';
+
+// local imports
+import { UserModule } from './modules/user/user.module';
+import { APP_FILTER } from '@nestjs/core';
+import { DuplicateKeyExceptionFilter } from './common/exeptions/duplicated-key.exception';
 
 @Module({
   imports: [
@@ -19,9 +23,19 @@ import { UsersModule } from './users/users.module';
       useFactory: async (configService: ConfigService) =>
         configService.get<MongooseModuleOptions>('database'),
     }),
-    UsersModule,
+    GraphQLModule.forRoot<ApolloDriverConfig>({
+      driver: ApolloDriver,
+      autoSchemaFile: true,
+    }),
+    UserModule,
   ],
   controllers: [AppController],
-  providers: [AppService, { provide: APP_GUARD, useClass: RolesGuard }],
+  providers: [
+    {
+      provide: APP_FILTER,
+      useClass: DuplicateKeyExceptionFilter,
+    },
+    AppService,
+  ],
 })
 export class AppModule {}
