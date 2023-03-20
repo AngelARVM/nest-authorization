@@ -1,11 +1,7 @@
-import {
-  BeforeCreateOne,
-  CreateOneInputType,
-} from '@nestjs-query/query-graphql';
 import { Field, InputType } from '@nestjs/graphql';
 
 @InputType()
-export class CreateUserInput {
+export class LoginUserInput {
   @Field()
   username: string;
 

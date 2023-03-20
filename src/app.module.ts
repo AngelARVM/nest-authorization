@@ -11,6 +11,7 @@ import configuration from './config/configuration';
 import { UserModule } from './modules/user/user.module';
 import { APP_FILTER } from '@nestjs/core';
 import { DuplicateKeyExceptionFilter } from './common/exeptions/duplicated-key.exception';
+import { AuthModule } from './modules/auth/auth.module';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { DuplicateKeyExceptionFilter } from './common/exeptions/duplicated-key.e
       autoSchemaFile: true,
     }),
     UserModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [

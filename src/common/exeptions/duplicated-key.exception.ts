@@ -9,9 +9,6 @@ export class DuplicateKeyExceptionFilter
   implements GqlExceptionFilter
 {
   catch(exception: MongoError, host: GqlExecutionContext) {
-    console.log('here', exception);
-    console.log(host);
-
     if (exception.code === 11000) {
       const message = 'El username ya existe.';
       throw Error(message);

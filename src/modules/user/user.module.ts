@@ -4,6 +4,8 @@ import { NestjsQueryMongooseModule } from '@nestjs-query/query-mongoose';
 import { UserEntity, UserSchema } from './entities/user.entity';
 import { UserDTO } from './dtos/user.dto';
 import { CreateUserInput } from './dtos/create-user.dto';
+import { UserService } from './user.service';
+import { UserResolver } from './user.resolver';
 
 @Module({
   imports: [
@@ -20,7 +22,10 @@ import { CreateUserInput } from './dtos/create-user.dto';
           CreateDTOClass: CreateUserInput,
         },
       ],
+      services: [UserService],
     }),
   ],
+  providers: [UserService],
+  exports: [UserService],
 })
 export class UserModule {}
