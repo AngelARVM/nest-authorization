@@ -24,50 +24,46 @@
 
 ## Description
 
+Este repositorio está pensado para estudiar estrategias de autorizacion (Authorization) por lo que cuenta con una base de librerias que lo hacen óptimo para empezar a practicar.
+
+Actualmente cuenta con: 
+- Módulo [Mongoose](https://docs.nestjs.com/techniques/mongodb) para conectar a una base de datos de mongoDB.
+- Módulo [NestJS-Query](https://doug-martin.github.io/nestjs-query/) para generar queries y mutations facilmente.
+- Módulo [Auth](https://docs.nestjs.com/security/authentication) que utiliza jwt-strategy para generar un access_token (aun no valida).
+- Módulo User para manejar usuarios rapidamente.
+- [docker-compose.yml](https://docs.docker.com/compose/) para crear un contenedor con mongodb al cual conectar la app.
+- [configuration](https://docs.nestjs.com/techniques/configuration) para manejar las variables de entorno.
+
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
 ## Installation
 
 ```bash
-$ npm install
+$ yarn install
+```
+
+## Run containers
+
+```bash
+$ docker-compose up -d
 ```
 
 ## Running the app
 
 ```bash
-# development
-$ npm run start
-
 # watch mode
-$ npm run start:dev
+$ yarn start:dev
 
-# production mode
-$ npm run start:prod
 ```
 
-## Test
 
-```bash
-# unit tests
-$ npm run test
+## Env example
 
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+```
+PORT=8001
+SALTS=5
+JWT_SECRET='secret'
+MONGO_URI='mongodb://localhost:27017/authentication'
 ```
 
-## Support
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
